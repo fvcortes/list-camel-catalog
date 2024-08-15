@@ -29,36 +29,6 @@ public class Main implements QuarkusApplication {
     private static final Logger LOG = Logger.getLogger(Main.class);
 
     public static void main(String... args) {
-
-        /*
-         * Any custom logic can be implemented here Here, we pass the value of the first argument to Quarkus CDI
-         * container so that it can be injected using
-         *
-         * @Inject @Named("greeting") And we pass the second argument as -durationMaxMessages which is the number of
-         * messages that the application will process before terminating
-         */
-        // List<String> filteredArgs = new ArrayList<>(args.length);
-        // if (args.length < 2) {
-        // LOG.warnf(
-        // "Expected at least 2 CLI arguments but got %d. Will proceed with default greeting. Refer to the README
-        // instructions.",
-        // args.length);
-        // greeting = "Hello";
-        // filteredArgs.add("-durationMaxMessages");
-        // filteredArgs.add("2");
-        // } else {
-        // int i = 0;
-        // greeting = args[i++];
-        // final String repeatTimes = args[i++];
-        // filteredArgs.add("-durationMaxMessages");
-        // filteredArgs.add(repeatTimes);
-
-        // for (; i < args.length; i++) {
-        // filteredArgs.add(args[i++]);
-        // }
-        // }
-
-        // Quarkus.run(CamelMainApplication.class, filteredArgs.toArray(new String[filteredArgs.size()]));
         Quarkus.run(Main.class, args);
     }
 
@@ -66,6 +36,7 @@ public class Main implements QuarkusApplication {
     public int run(String... args) {
         CamelCatalog camelCatalog = new DefaultCamelCatalog();
         LOG.infof("Catalog Component Names: %s", camelCatalog.findComponentNames());
+        LOG.infof("Catalog Model Names: %s", camelCatalog.findModelNames());
         return 0;
     }
 }
