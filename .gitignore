@@ -23,8 +23,12 @@
 hs_err_pid*
 replay_pid*
 
+target/
+
 #IntelliJ
 idea/
 
 #VSCode
 .vscode/
+
+*.log*
