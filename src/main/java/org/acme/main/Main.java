@@ -21,6 +21,7 @@ import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
 import org.apache.camel.catalog.CamelCatalog;
 import org.apache.camel.catalog.DefaultCamelCatalog;
+import org.apache.camel.catalog.quarkus.QuarkusRuntimeProvider;
 import org.jboss.logging.Logger;
 
 @QuarkusMain
@@ -35,8 +36,12 @@ public class Main implements QuarkusApplication {
     @Override
     public int run(String... args) {
         CamelCatalog camelCatalog = new DefaultCamelCatalog();
+        // definir o provider não é necessário para funcionar, mas limita as buscas aos componentes 
+        // que são suportados no Quarkus
+        camelCatalog.setRuntimeProvider(new QuarkusRuntimeProvider());
         LOG.infof("Catalog Component Names: %s", camelCatalog.findComponentNames());
         LOG.infof("Catalog Model Names: %s", camelCatalog.findModelNames());
+        LOG.infof("Http model: %s", camelCatalog.componentJSonSchema("http"));
         return 0;
     }
 }
